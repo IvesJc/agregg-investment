@@ -36,13 +36,13 @@ public class User {
 
     }
 
-    public User(Instant creationTimestamp, String email, String password, Instant updateTimestamp, UUID userId, String username) {
-        this.creationTimestamp = creationTimestamp;
-        this.email = email;
-        this.password = password;
-        this.updateTimestamp = updateTimestamp;
+    public User(UUID userId, String username, String email, String password, Instant creationTimestamp, Instant updateTimestamp) {
         this.userId = userId;
         this.username = username;
+        this.email = email;
+        this.password = password;
+        this.creationTimestamp = creationTimestamp;
+        this.updateTimestamp = updateTimestamp;
     }
 
     public String getEmail() {
@@ -75,5 +75,21 @@ public class User {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public Instant getCreationTimestamp() {
+        return creationTimestamp;
+    }
+
+    public void setCreationTimestamp(Instant creationTimestamp) {
+        this.creationTimestamp = creationTimestamp;
+    }
+
+    public Instant getUpdateTimestamp() {
+        return updateTimestamp;
+    }
+
+    public void setUpdateTimestamp(Instant updateTimestamp) {
+        this.updateTimestamp = updateTimestamp;
     }
 }
