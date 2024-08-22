@@ -24,10 +24,8 @@ public class UserServiceImpl implements UserService {
         return userRepository.findAll();
     }
 
-    public User findById(UUID uuid){
-        Optional<User> userDTO = userRepository.findById(uuid);
-
-        return userDTO.orElse(null);
+    public Optional<User> findById(UUID userId){
+        return userRepository.findById(userId);
     }
 
 
