@@ -1,6 +1,10 @@
 package ives.agregginvestment.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.UUID;
 
@@ -8,6 +12,10 @@ import java.util.UUID;
 
 @Embeddable
 // @Embeddable : indica ao Spring que pode utilizar essa classe como ID da entidade
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class AccountStockId {
 
     @Column(name = "account_id")
@@ -15,28 +23,4 @@ public class AccountStockId {
 
     @Column(name = "stock_id")
     private String stockId;
-
-    public AccountStockId() {
-    }
-
-    public AccountStockId(UUID accountId, String stockId) {
-        this.accountId = accountId;
-        this.stockId = stockId;
-    }
-
-    public UUID getAccountId() {
-        return accountId;
-    }
-
-    public void setAccountId(UUID accountId) {
-        this.accountId = accountId;
-    }
-
-    public String getStockId() {
-        return stockId;
-    }
-
-    public void setStockId(String stockId) {
-        this.stockId = stockId;
-    }
 }
