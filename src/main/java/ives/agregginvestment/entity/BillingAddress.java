@@ -22,7 +22,7 @@ public class BillingAddress {
     @Column(name = "account_id")
     private UUID id;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "account_id")
     @MapsId
     private Account accountId;

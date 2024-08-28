@@ -29,7 +29,8 @@ public class Account {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToOne(mappedBy = "accountId")
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "accountId")
+    // cascade = O que for feito em uma entidade, refletirá na outra
     @PrimaryKeyJoinColumn
     // @PrimaryKeyJoinColumn = Informa que essa também é PK de outra classe
     private BillingAddress billingAddress;

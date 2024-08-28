@@ -1,10 +1,13 @@
 package ives.agregginvestment.controller;
 
-import ives.agregginvestment.dto.CreateUserDTO;
-import ives.agregginvestment.dto.UpdateUserDTO;
+import ives.agregginvestment.controller.dto.AccountResponseDTO;
+import ives.agregginvestment.controller.dto.CreateAccountDTO;
+import ives.agregginvestment.controller.dto.CreateUserDTO;
+import ives.agregginvestment.controller.dto.UpdateUserDTO;
 import ives.agregginvestment.entity.User;
+import ives.agregginvestment.service.impl.AccountServiceImpl;
 import ives.agregginvestment.service.impl.UserServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,10 +18,12 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/users")
+@RequiredArgsConstructor
 public class UserController {
 
-    @Autowired
-    private UserServiceImpl userServiceImpl;
+    private final AccountServiceImpl accountService;
+
+    private final UserServiceImpl userServiceImpl;
 
     @GetMapping
     public ResponseEntity<List<User>> findAllUsers() {
@@ -53,5 +58,21 @@ public class UserController {
         userServiceImpl.deleteUserById(id);
         return ResponseEntity.noContent().build();
     }
+
+    // =========================== ACCOUNTS ==================================
+
+    @PostMapping("/{userId}/accounts")
+    public ResponseEntity<Void> createAccount(@RequestBody CreateAccountDTO account,
+                                                 @PathVariable("userId") UUID userId){
+        userServiceImpl.createAccount(account, userId);
+        return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/{userId}/accounts")
+    public ResponseEntity<List<AccountResponseDTO>> getAllAccountsByUserId(@PathVariable("userId") UUID userId){
+        List<AccountResponseDTO> accountList = userServiceImpl.getAllAccountsByUserId(userId);
+        return ResponseEntity.ok(accountList);
+    }
+
 
 }

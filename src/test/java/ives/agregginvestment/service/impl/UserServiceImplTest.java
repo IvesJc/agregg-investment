@@ -1,7 +1,7 @@
 package ives.agregginvestment.service.impl;
 
-import ives.agregginvestment.dto.CreateUserDTO;
-import ives.agregginvestment.dto.UpdateUserDTO;
+import ives.agregginvestment.controller.dto.CreateUserDTO;
+import ives.agregginvestment.controller.dto.UpdateUserDTO;
 import ives.agregginvestment.entity.User;
 import ives.agregginvestment.repository.UserRepository;
 import org.junit.jupiter.api.Nested;

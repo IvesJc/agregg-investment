@@ -1,4 +1,4 @@
-package ives.agregginvestment.dto;
+package ives.agregginvestment.controller.dto;
 
 public record CreateUserDTO(
         String username,
