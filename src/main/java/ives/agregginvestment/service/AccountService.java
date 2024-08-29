@@ -1,7 +1,7 @@
 package ives.agregginvestment.service;
 
-import ives.agregginvestment.controller.dto.AccountStockResponseDTO;
-import ives.agregginvestment.controller.dto.AssociateAccountStockDTO;
+import ives.agregginvestment.controller.dto.AccountStock.AccountStockResponseDTO;
+import ives.agregginvestment.controller.dto.AccountStock.AssociateAccountStockDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

@@ -1,7 +1,7 @@
 package ives.agregginvestment.controller;
 
-import ives.agregginvestment.controller.dto.AccountStockResponseDTO;
-import ives.agregginvestment.controller.dto.AssociateAccountStockDTO;
+import ives.agregginvestment.controller.dto.AccountStock.AccountStockResponseDTO;
+import ives.agregginvestment.controller.dto.AccountStock.AssociateAccountStockDTO;
 import ives.agregginvestment.service.impl.AccountServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

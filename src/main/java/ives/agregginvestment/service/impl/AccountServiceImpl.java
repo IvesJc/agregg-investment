@@ -1,7 +1,7 @@
 package ives.agregginvestment.service.impl;
 
-import ives.agregginvestment.controller.dto.AccountStockResponseDTO;
-import ives.agregginvestment.controller.dto.AssociateAccountStockDTO;
+import ives.agregginvestment.controller.dto.AccountStock.AccountStockResponseDTO;
+import ives.agregginvestment.controller.dto.AccountStock.AssociateAccountStockDTO;
 import ives.agregginvestment.entity.Account;
 import ives.agregginvestment.entity.AccountStock;
 import ives.agregginvestment.entity.AccountStockId;

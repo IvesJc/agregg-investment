@@ -1,7 +1,7 @@
 package ives.agregginvestment.service.impl;
 
-import ives.agregginvestment.controller.dto.CreateUserDTO;
-import ives.agregginvestment.controller.dto.UpdateUserDTO;
+import ives.agregginvestment.controller.dto.User.RequestCreateUserDTO;
+import ives.agregginvestment.controller.dto.User.RequestUpdateUserDTO;
 import ives.agregginvestment.entity.User;
 import ives.agregginvestment.repository.UserRepository;
 import org.junit.jupiter.api.Nested;
@@ -14,6 +14,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -67,7 +68,8 @@ class UserServiceImplTest {
                     "email@email.com",
                     "password",
                     Instant.now(),
-                    null
+                    null,
+                    new ArrayList<>()
             );
             List<User> userList = List.of(user);
             doReturn(userList).when(userRepository).findAll();
@@ -93,7 +95,8 @@ class UserServiceImplTest {
                     "email@email.com",
                     "password",
                     Instant.now(),
-                    null
+                    null,
+                    new ArrayList<>()
             );
             doReturn(Optional.of(user)).when(userRepository).findById(uuidArgumentCaptor.capture());
 
@@ -145,7 +148,8 @@ class UserServiceImplTest {
                     "email@email.com",                       //Aqui, você está criando um objeto User com valores simulados.
                     "password",
                     Instant.now(),
-                    null
+                    null,
+                    new ArrayList<>()
             );
             doReturn(user).when(userRepository).save(userArgumentCaptor.capture());
             //Essa linha configura o mock userRepository para retornar o objeto user
@@ -153,7 +157,7 @@ class UserServiceImplTest {
             // que ele aceitará qualquer instância do tipo User). Isso simula a operação de salvar o
             // usuário no banco de dados.
 
-            CreateUserDTO input = new CreateUserDTO(
+            RequestCreateUserDTO input = new RequestCreateUserDTO(
                     "username",
                     "email@email.com",
                     "email123");
@@ -161,7 +165,7 @@ class UserServiceImplTest {
 
 
             // Act
-            UUID output = userService.createUser(input);
+            UUID output = userService.createUser(input).id();
 
             // Assert
             assertNotNull(output);
@@ -180,7 +184,7 @@ class UserServiceImplTest {
 
             doThrow(new RuntimeException()).when(userRepository).save(any());
 
-            CreateUserDTO input = new CreateUserDTO(
+            RequestCreateUserDTO input = new RequestCreateUserDTO(
                     "username",
                     "email@email.com",
                     "email123");
@@ -197,7 +201,7 @@ class UserServiceImplTest {
         @Test
         void shouldUpdateUserByIdWithSuccessWhenUserExists() {
             // Arrange
-            UpdateUserDTO updateUserDTO = new UpdateUserDTO(
+            RequestUpdateUserDTO updateUserDTO = new RequestUpdateUserDTO(
                     "newUsername",
                     "newPassword",
                     null
@@ -208,7 +212,8 @@ class UserServiceImplTest {
                     "email@email.com",
                     "password",
                     Instant.now(),
-                    null
+                    null,
+                    new ArrayList<>()
             );
             doReturn(Optional.of(user)).when(userRepository).findById(uuidArgumentCaptor.capture());
             doReturn(user).when(userRepository).save(userArgumentCaptor.capture());
@@ -227,7 +232,7 @@ class UserServiceImplTest {
         @Test
         void shouldNotUpdateUserByIdWithSuccessWhenUserNotExists() {
             // Arrange
-            UpdateUserDTO updateUserDTO = new UpdateUserDTO(
+            RequestUpdateUserDTO updateUserDTO = new RequestUpdateUserDTO(
                     "newUsername",
                     "newPassword",
                     null
@@ -260,7 +265,8 @@ class UserServiceImplTest {
                     "email@email.com",
                     "password",
                     Instant.now(),
-                    null
+                    null,
+                    new ArrayList<>()
             );
             doReturn(Optional.of(user))
                     .when(userRepository)

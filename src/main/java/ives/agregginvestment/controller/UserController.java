@@ -1,9 +1,8 @@
 package ives.agregginvestment.controller;
 
-import ives.agregginvestment.controller.dto.AccountResponseDTO;
-import ives.agregginvestment.controller.dto.CreateAccountDTO;
-import ives.agregginvestment.controller.dto.CreateUserDTO;
-import ives.agregginvestment.controller.dto.UpdateUserDTO;
+import ives.agregginvestment.controller.dto.Account.AccountResponseDTO;
+import ives.agregginvestment.controller.dto.Account.CreateAccountDTO;
+import ives.agregginvestment.controller.dto.User.*;
 import ives.agregginvestment.entity.User;
 import ives.agregginvestment.service.impl.AccountServiceImpl;
 import ives.agregginvestment.service.impl.UserServiceImpl;
@@ -21,8 +20,6 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class UserController {
 
-    private final AccountServiceImpl accountService;
-
     private final UserServiceImpl userServiceImpl;
 
     @GetMapping
@@ -32,24 +29,21 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<User>> findById(@PathVariable UUID id) {
-        Optional<User> user = userServiceImpl.findById(id);
-        if (user.isPresent()){
-            return ResponseEntity.ok(user);
-        }
-        throw new RuntimeException();
+    public ResponseEntity<ResponseFindByIdUserDTO> findById(@PathVariable UUID id) {
+        ResponseFindByIdUserDTO userDTO = userServiceImpl.findById(id);
+        return ResponseEntity.ok(userDTO);
     }
 
     @PostMapping
-    public ResponseEntity<User> createUser(@RequestBody CreateUserDTO userDTO) {
-        UUID userId = userServiceImpl.createUser(userDTO);
-        return ResponseEntity.created(URI.create("/v1/users/" +userId)).build();
+    public ResponseEntity<RespondCreateUserDTO> createUser(@RequestBody RequestCreateUserDTO userDTO) {
+        RespondCreateUserDTO newUser = userServiceImpl.createUser(userDTO);
+        return ResponseEntity.created(URI.create("/users/" +newUser.id())).build();
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<User> updateUser(@RequestBody UpdateUserDTO user,
-                                           @PathVariable UUID id) {
-        User newUser = userServiceImpl.updateUser(id, user);
+    public ResponseEntity<ResponseUpdateUserDTO> updateUser(@RequestBody RequestUpdateUserDTO user,
+                                                            @PathVariable UUID id) {
+        ResponseUpdateUserDTO newUser = userServiceImpl.updateUser(id, user);
         return ResponseEntity.ok(newUser);
     }
 

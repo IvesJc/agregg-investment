@@ -1,4 +1,4 @@
-package ives.agregginvestment.controller.dto;
+package ives.agregginvestment.controller.dto.Account;
 
 public record CreateAccountDTO(
         String description,

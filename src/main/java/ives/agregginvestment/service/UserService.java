@@ -1,9 +1,8 @@
 package ives.agregginvestment.service;
 
-import ives.agregginvestment.controller.dto.AccountResponseDTO;
-import ives.agregginvestment.controller.dto.CreateAccountDTO;
-import ives.agregginvestment.controller.dto.CreateUserDTO;
-import ives.agregginvestment.controller.dto.UpdateUserDTO;
+import ives.agregginvestment.controller.dto.Account.AccountResponseDTO;
+import ives.agregginvestment.controller.dto.Account.CreateAccountDTO;
+import ives.agregginvestment.controller.dto.User.*;
 import ives.agregginvestment.entity.User;
 
 import java.util.List;
@@ -12,10 +11,10 @@ import java.util.UUID;
 
 public interface UserService {
 
-    UUID createUser(CreateUserDTO userDTO);
+    RespondCreateUserDTO createUser(RequestCreateUserDTO userDTO);
     List<User> findAllUsers();
-    Optional<User> findById(UUID uuid);
-    User updateUser(UUID uuid, UpdateUserDTO user);
+    ResponseFindByIdUserDTO findById(UUID uuid);
+    ResponseUpdateUserDTO updateUser(UUID uuid, RequestUpdateUserDTO user);
     void deleteUserById(UUID uuid);
 
 

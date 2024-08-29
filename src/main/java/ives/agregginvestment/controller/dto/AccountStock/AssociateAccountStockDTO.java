@@ -1,4 +1,4 @@
-package ives.agregginvestment.controller.dto;
+package ives.agregginvestment.controller.dto.AccountStock;
 
 public record AssociateAccountStockDTO(
         String stockId,

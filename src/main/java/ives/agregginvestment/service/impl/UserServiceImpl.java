@@ -1,9 +1,8 @@
 package ives.agregginvestment.service.impl;
 
-import ives.agregginvestment.controller.dto.AccountResponseDTO;
-import ives.agregginvestment.controller.dto.CreateAccountDTO;
-import ives.agregginvestment.controller.dto.CreateUserDTO;
-import ives.agregginvestment.controller.dto.UpdateUserDTO;
+import ives.agregginvestment.controller.dto.Account.AccountResponseDTO;
+import ives.agregginvestment.controller.dto.Account.CreateAccountDTO;
+import ives.agregginvestment.controller.dto.User.*;
 import ives.agregginvestment.entity.Account;
 import ives.agregginvestment.entity.BillingAddress;
 import ives.agregginvestment.entity.User;
@@ -12,8 +11,8 @@ import ives.agregginvestment.repository.BillingAddressRepository;
 import ives.agregginvestment.repository.UserRepository;
 import ives.agregginvestment.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -34,16 +33,27 @@ public class UserServiceImpl implements UserService {
     private final BillingAddressRepository billingAddressRepository;
 
 
-    public List<User> findAllUsers(){
+    public List<User> findAllUsers() {
         return userRepository.findAll();
     }
 
-    public Optional<User> findById(UUID userId){
-        return userRepository.findById(userId);
+    public ResponseFindByIdUserDTO findById(UUID userId) {
+        Optional<User> user = userRepository.findById(userId);
+        if (user.isPresent()){
+            User newUser = user.get();
+            return new ResponseFindByIdUserDTO(
+                    newUser.getUsername(),
+                    newUser.getEmail(),
+                    newUser.getCreationTimestamp(),
+                    newUser.getUpdateTimestamp(),
+                    newUser.getAccounts()
+            );
+        }
+        throw new RuntimeException();
     }
 
 
-    public UUID createUser(CreateUserDTO userDTO){
+    public RespondCreateUserDTO createUser(RequestCreateUserDTO userDTO) {
         User user = new User(
                 UUID.randomUUID(),
                 userDTO.username(),
@@ -52,23 +62,34 @@ public class UserServiceImpl implements UserService {
                 Instant.now(),
                 null,
                 new ArrayList<>());
-        User userSaved = userRepository.save(user);
-        return userSaved.getUserId();
+        RespondCreateUserDTO createUserDTO = new RespondCreateUserDTO(
+                user.getUserId(),
+                user.getUsername(),
+                user.getEmail(),
+                user.getCreationTimestamp()
+        );
+        userRepository.save(user);
+        return createUserDTO;
     }
 
     @Override
-    public User updateUser(UUID uuid, UpdateUserDTO userDTO) {
+    public ResponseUpdateUserDTO updateUser(UUID uuid, RequestUpdateUserDTO userDTO) {
         Optional<User> optionalUser = userRepository.findById(uuid);
 
-        if (optionalUser.isPresent()){
-               User newUser = optionalUser.get();
-               newUser.setUsername(userDTO.username());
-               newUser.setPassword(userDTO.password());
-               newUser.setUpdateTimestamp(Instant.now());
+        if (optionalUser.isPresent()) {
+            User newUser = optionalUser.get();
+            newUser.setUsername(userDTO.username());
+            newUser.setEmail(userDTO.email());
+            newUser.setPassword(userDTO.password());
+            newUser.setUpdateTimestamp(Instant.now());
 
-               userRepository.save(newUser);
+            userRepository.save(newUser);
 
-               return newUser;
+            return new ResponseUpdateUserDTO(
+                    newUser.getUsername(),
+                    newUser.getEmail(),
+                    newUser.getUpdateTimestamp()
+            );
         }
         return null;
     }
@@ -76,7 +97,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteUserById(UUID uuid) {
         Optional<User> optionalUser = userRepository.findById(uuid);
-        if (optionalUser.isPresent()){
+        if (optionalUser.isPresent()) {
             userRepository.deleteById(uuid);
         }
     }
