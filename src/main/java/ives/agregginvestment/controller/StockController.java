@@ -1,6 +1,6 @@
 package ives.agregginvestment.controller;
 
-import ives.agregginvestment.controller.dto.Stock.CreateStockDTO;
+import ives.agregginvestment.controller.dto.stock.CreateStockDTO;
 import ives.agregginvestment.entity.Stock;
 import ives.agregginvestment.service.impl.StockServiceImpl;
 import lombok.RequiredArgsConstructor;

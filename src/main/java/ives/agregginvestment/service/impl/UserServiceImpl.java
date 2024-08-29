@@ -1,8 +1,8 @@
 package ives.agregginvestment.service.impl;
 
-import ives.agregginvestment.controller.dto.Account.AccountResponseDTO;
-import ives.agregginvestment.controller.dto.Account.CreateAccountDTO;
-import ives.agregginvestment.controller.dto.User.*;
+import ives.agregginvestment.controller.dto.account.AccountResponseDTO;
+import ives.agregginvestment.controller.dto.account.CreateAccountDTO;
+import ives.agregginvestment.controller.dto.user.*;
 import ives.agregginvestment.entity.Account;
 import ives.agregginvestment.entity.BillingAddress;
 import ives.agregginvestment.entity.User;
@@ -12,7 +12,6 @@ import ives.agregginvestment.repository.UserRepository;
 import ives.agregginvestment.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 

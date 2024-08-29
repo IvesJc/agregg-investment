@@ -1,4 +1,4 @@
-package ives.agregginvestment.controller.dto.User;
+package ives.agregginvestment.controller.dto.user;
 
 import java.time.Instant;
 

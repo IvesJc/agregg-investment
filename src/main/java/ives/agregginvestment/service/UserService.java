@@ -1,12 +1,11 @@
 package ives.agregginvestment.service;
 
-import ives.agregginvestment.controller.dto.Account.AccountResponseDTO;
-import ives.agregginvestment.controller.dto.Account.CreateAccountDTO;
-import ives.agregginvestment.controller.dto.User.*;
+import ives.agregginvestment.controller.dto.account.AccountResponseDTO;
+import ives.agregginvestment.controller.dto.account.CreateAccountDTO;
+import ives.agregginvestment.controller.dto.user.*;
 import ives.agregginvestment.entity.User;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 public interface UserService {

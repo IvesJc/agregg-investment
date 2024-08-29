@@ -1,6 +1,6 @@
 package ives.agregginvestment.service;
 
-import ives.agregginvestment.controller.dto.Stock.CreateStockDTO;
+import ives.agregginvestment.controller.dto.stock.CreateStockDTO;
 import ives.agregginvestment.entity.Stock;
 
 public interface StockService {

@@ -1,10 +1,9 @@
 package ives.agregginvestment.controller;
 
-import ives.agregginvestment.controller.dto.Account.AccountResponseDTO;
-import ives.agregginvestment.controller.dto.Account.CreateAccountDTO;
-import ives.agregginvestment.controller.dto.User.*;
+import ives.agregginvestment.controller.dto.account.AccountResponseDTO;
+import ives.agregginvestment.controller.dto.account.CreateAccountDTO;
+import ives.agregginvestment.controller.dto.user.*;
 import ives.agregginvestment.entity.User;
-import ives.agregginvestment.service.impl.AccountServiceImpl;
 import ives.agregginvestment.service.impl.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @RestController
